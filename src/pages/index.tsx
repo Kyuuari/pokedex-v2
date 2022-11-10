@@ -1,11 +1,22 @@
 import { GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import PokemonList from "../components/PokemonList";
 
 const URL = "https://pokeapi.co/api/v2/pokemon?limit=5";
 
-const Home: NextPage = ({ pokemon }: any) => {
+interface PokemonItem {
+  name: string;
+  url: string;
+  image: string;
+}
+
+interface PokemonList {
+  pokemon: PokemonItem[];
+}
+
+const Home: NextPage<PokemonList> = ({ pokemon }) => {
   console.log(pokemon);
   return (
     <>
@@ -17,10 +28,11 @@ const Home: NextPage = ({ pokemon }: any) => {
 
       <main className="grid place-content-center">
         <h1>Pokemon List</h1>
-        {pokemon.map(({ name }: any, index: number) => {
+        {pokemon.map(({ name, url, image }, index) => {
           return (
-            <div key={index}>
-              <p>{name}</p>
+            <div key={index} className="h-[20rem] w-[10rem] bg-slate-100">
+              <Image alt="pokemon image" src={image} width={500} height={500} />
+              <h3>{name}</h3>
             </div>
           );
         })}
@@ -34,7 +46,7 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch(URL);
   const { results } = await res.json();
-  const pokemon = results.map((pokeman: any, index: any) => {
+  const pokemon: PokemonItem[] = results.map((pokeman: any, index: number) => {
     const paddedId = ("00" + (index + 1)).slice(-3);
     const image = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${paddedId}.png`;
     return { ...pokeman, image };
