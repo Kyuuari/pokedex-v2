@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const PokeCard = (props: Props) => {
-  return (
-    <div>PokeCard</div>
-  )
-}
+  return <div>PokeCard</div>;
+};
 
-export default PokeCard
+export default PokeCard;

@@ -1,10 +1,9 @@
-import { GetStaticProps, type NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import PokemonList from "../components/PokemonList";
 
-const URL = "https://pokeapi.co/api/v2/pokemon?limit=5";
+const URL = "https://pokeapi.co/api/v2/pokemon?limit=8";
 
 interface PokemonItem {
   name: string;
@@ -26,16 +25,28 @@ const Home: NextPage<PokemonList> = ({ pokemon }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="grid place-content-center">
+      <main className="grid h-full w-full place-content-center">
         <h1>Pokemon List</h1>
-        {pokemon.map(({ name, url, image }, index) => {
-          return (
-            <div key={index} className="h-[20rem] w-[10rem] bg-slate-100">
-              <Image alt="pokemon image" src={image} width={500} height={500} />
-              <h3>{name}</h3>
-            </div>
-          );
-        })}
+
+        <div className="grid gap-2 md:grid-cols-4 lg:grid-cols-6">
+          {pokemon.map(({ name, url, image }, index) => {
+            return (
+              <Link
+                href={`/pokemon/` + name}
+                key={index}
+                className="grid h-[20rem] w-[10rem] place-content-center rounded bg-slate-100"
+              >
+                <Image
+                  alt="pokemon image"
+                  src={image}
+                  width={500}
+                  height={500}
+                />
+                <h3 className="text-center">{name}</h3>
+              </Link>
+            );
+          })}
+        </div>
       </main>
     </>
   );
