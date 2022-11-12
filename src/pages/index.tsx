@@ -2,8 +2,7 @@ import { GetStaticPaths, GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-
-const URL = "https://pokeapi.co/api/v2/pokemon?limit=8";
+import { URL } from "../components/ExternalData";
 
 interface PokemonItem {
   name: string;
@@ -25,7 +24,7 @@ const Home: NextPage<PokemonList> = ({ pokemon }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="grid h-full w-full place-content-center">
+      <main className="grid h-full min-h-screen w-full place-content-center">
         <h1>Pokemon List</h1>
 
         <div className="grid gap-2 md:grid-cols-4 lg:grid-cols-6">

@@ -1,4 +1,4 @@
-@import url('link href="https://api.fontshare.com/v2/css?f[]=switzer@300&f[]=outfit@600&display=swap" rel="stylesheet"');
+/* @import url('link href="https://api.fontshare.com/v2/css?f[]=switzer@300&f[]=outfit@600&display=swap" rel="stylesheet"'); */
 
 @tailwind base;
 @tailwind components;
@@ -7,12 +7,14 @@
 @layer base{
 
     body,html{
-        @apply bg-slate-50
-        font-family: Proxima Nova, system-ui, sans-serif;
+        @apply bg-slate-50;
+        
+        font-family: 'Outfit', sans-serif;
     }
 
 
     h1,h2{
-        @apply text-2xl font-bold
+        @apply text-2xl font-bold;
+        font-family: 'Switzer', sans-serif;
     }
 }

@@ -1,8 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import React from "react";
+import { a, SpringValue, to, useSpring } from "react-spring";
+import { URL } from "../../components/ExternalData";
 
-const URL = "https://pokeapi.co/api/v2/pokemon?limit=8";
 // const URL_Pokemon = "https://pokeapi.co/api/v2/pokemon/";
 
 const MAX_BASE_STAT = 255;
@@ -43,16 +44,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const PokemonInfo = ({ pokemoninfo }: any) => {
   console.log(pokemoninfo);
+  const props = useSpring({ value: 0 });
   return (
     <div className="grid h-screen w-screen place-content-center p-20">
       <div className="">
-        <h3>{pokemoninfo.name}</h3>
         <Image
           alt="pokemon sprite"
-          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/00${pokemoninfo.id}.png`}
+          src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${(
+            "00" + pokemoninfo.id
+          ).slice(-3)}.png`}
           width={200}
           height={200}
         />
+        <h2>{pokemoninfo.name}</h2>
 
         <p>No. {pokemoninfo.id}</p>
         {pokemoninfo.stats.map(
@@ -60,11 +64,14 @@ const PokemonInfo = ({ pokemoninfo }: any) => {
             return (
               <div key={index}>
                 <p>{stat.name}</p>
-                <progress
+                <a.progress
                   className="progress w-56"
-                  value={base_stat}
+                  value={
+                    useSpring({ from: { value: 0 }, to: { value: base_stat } })
+                      .value
+                  }
                   max={MAX_BASE_STAT}
-                ></progress>
+                ></a.progress>
               </div>
             );
           }
