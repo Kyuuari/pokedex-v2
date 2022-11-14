@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { a, SpringValue, to, useSpring } from "react-spring";
 import { URL } from "../../components/ExternalData";
+import TypeTag from "../../components/TypeTag";
 
 // const URL_Pokemon = "https://pokeapi.co/api/v2/pokemon/";
 
@@ -59,6 +60,15 @@ const PokemonInfo = ({ pokemoninfo }: any) => {
         <h2>{pokemoninfo.name}</h2>
 
         <p>No. {pokemoninfo.id}</p>
+
+        {pokemoninfo.types.map(({ type }: any, index: number) => {
+          return (
+            <div>
+              {/* <p>{type.name}</p> */}
+              <TypeTag poketype={type.name} />
+            </div>
+          );
+        })}
         {pokemoninfo.stats.map(
           ({ base_stat, stat, sprites }: any, index: number) => {
             return (
