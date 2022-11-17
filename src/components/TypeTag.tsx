@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   poketype: string;
@@ -6,7 +6,9 @@ type Props = {
 };
 
 const TypeTag = ({ children, poketype }: Props) => {
-  return <div className="badge badge-md">{poketype}</div>;
+  const [type, setType] = useState(poketype);
+
+  return <div className={"badge badge-md" + " " + poketype}>{type}</div>;
 };
 
 export default TypeTag;
