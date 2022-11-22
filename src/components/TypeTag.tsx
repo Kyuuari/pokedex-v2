@@ -8,7 +8,7 @@ type Props = {
 const TypeTag = ({ children, poketype }: Props) => {
   const [type, setType] = useState(poketype);
 
-  return <div className={"badge badge-md" + " " + poketype}>{type}</div>;
+  return <div className={`badge badge-md ${poketype}`}>{type}</div>;
 };
 
 export default TypeTag;
